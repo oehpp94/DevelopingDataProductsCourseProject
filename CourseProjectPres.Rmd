@@ -1,0 +1,58 @@
+---
+title: "Developing Data Products Course Project"
+date: "12/08/2019"
+output: ioslides_presentation
+---
+
+## Introduction
+
+The project consists on creating an app using Shiny, which utilizes user input to generate an output.
+
+The app that was created is a simple leaflet map where the user is able to use sliders to change the latitude and longitude. The app in turn, receives the input to refresh the map onto the new location.
+
+## App User Interface Explanation
+
+The contains a side bar with sliders for the user input, and a main panel with the map and location registered in the marker
+
+```{r, eval=FALSE}
+sidebarLayout
+    (
+      sidebarPanel
+      (
+        h3("Coordinates"),
+        sliderInput("lat", "Latitude:", min = -180, max = 180, value = 0),
+        sliderInput("lon", "Longitude:", min = -180, max = 180, value = 0)
+      ),
+      
+      mainPanel
+      (
+        h3("World Map:"),
+        leafletOutput("map"),
+        h3("Location:"),
+        textOutput("loc")
+      )
+    )
+```
+
+## App Calculation
+
+Upon receiving new input from the sliders, the app calculates the location and refreshes the leaflet map similar to the one below:
+
+```{r, echo=FALSE, warning=FALSE}
+library(leaflet)
+
+collegeLatLong <- data.frame(lat = c(25.7574), lng = c(-80.3733))
+collegeLatLong %>%
+  leaflet() %>%
+  addTiles() %>%
+  addMarkers()
+```
+
+## Links
+
+Shiny App: https://oehpp94.shinyapps.io/CourseProject/
+
+Source Code: https://github.com/oehpp94/DevelopingDataProductsCourseProject
+
+
+
